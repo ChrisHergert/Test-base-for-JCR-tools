@@ -3,8 +3,7 @@ import csv
 import pandas as pd
 from pprint import pprint
 
-path = r"C:\Users\cjh0372\Desktop\New folder"
-#path2 = 
+path = r"C:\Users\cjh0372\Desktop\New folder" # this is the raw text string of the directory on my dtop where I have all my downloaded files.
 catch1 = 'Categories: \''
 catch2 = '\' Selected Category'
 edition = 'SCIE - '
@@ -22,24 +21,24 @@ for file in files:
 		os.rename(os.path.join(path, file), os.path.join(path, categ))
 # ######################################################### os.rename(os.path.join(path, file), os.path.join(path, str(index)+'.jpg'))
 '''
-ogdf = pd.DataFrame(columns = [	'Rank',
-								'Full Journal Title',
-								'JCR Abbreviated Title',
-								'ISSN',
-								'Total Cites',
-								'Journal Impact Factor',
-								'Impact Factor without Journal Self Cites',
-								'5-Year Impact Factor,'
-								'Immediacy Index',
-								'Citable Items',
-								'Cited Half-Life',
-								'Citing Half-life',
-								'Eigenfactor Score',
-								'Article Influence Score',
-								'% Articles in Citable Items',
-								'Average Journal Impact Factor Percentile',
-								'Normalized Eigenfactor',
-								'Category'])
+compiled_file = pd.DataFrame(columns = [	'Rank',
+						'Full Journal Title',
+						'JCR Abbreviated Title',
+						'ISSN',
+						'Total Cites',
+						'Journal Impact Factor',
+						'Impact Factor without Journal Self Cites',
+						'5-Year Impact Factor', ## Note: This is where that misplaced comma was. Fix in local.
+						'Immediacy Index',
+						'Citable Items',
+						'Cited Half-Life',
+						'Citing Half-life',
+						'Eigenfactor Score',
+						'Article Influence Score',
+						'% Articles in Citable Items',
+						'Average Journal Impact Factor Percentile',
+						'Normalized Eigenfactor',
+						'Category'])
 #
 for file in files: 		# look at each file in the directory
 	with open(os.path.join(path, file),'r') as f:	# open the current file in read-only mode as 'f'
@@ -51,8 +50,8 @@ for file in files: 		# look at each file in the directory
 				f1.write(line)
 			df = pd.read_csv(newname)
 			df['Category'] = category_name
-			ogdf = pd.concat([ogdf, df], ignore_index = True)
+			output_endfile = pd.concat([ogdf, df], ignore_index = True)
 		os.remove(newname)
 print('done!')
-ogdf.to_csv('ogdf.csv')
+output_endfile.to_csv('ogdf.csv')
 #'''
